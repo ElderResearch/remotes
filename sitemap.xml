@@ -10,10 +10,19 @@
     <loc>https://remotes.r-lib.org/reference/bioc_install_repos.html</loc>
   </url>
   <url>
+    <loc>https://remotes.r-lib.org/reference/download.html</loc>
+  </url>
+  <url>
     <loc>https://remotes.r-lib.org/reference/download_version.html</loc>
   </url>
   <url>
+    <loc>https://remotes.r-lib.org/reference/git_credentials.html</loc>
+  </url>
+  <url>
     <loc>https://remotes.r-lib.org/reference/github_refs.html</loc>
+  </url>
+  <url>
+    <loc>https://remotes.r-lib.org/reference/github_remote.html</loc>
   </url>
   <url>
     <loc>https://remotes.r-lib.org/reference/gitlab_pat.html</loc>
@@ -46,6 +55,9 @@
     <loc>https://remotes.r-lib.org/reference/install_local.html</loc>
   </url>
   <url>
+    <loc>https://remotes.r-lib.org/reference/install_remote.html</loc>
+  </url>
+  <url>
     <loc>https://remotes.r-lib.org/reference/install_svn.html</loc>
   </url>
   <url>
@@ -62,6 +74,9 @@
   </url>
   <url>
     <loc>https://remotes.r-lib.org/reference/standardise_dep.html</loc>
+  </url>
+  <url>
+    <loc>https://remotes.r-lib.org/reference/system_requirements.html</loc>
   </url>
   <url>
     <loc>https://remotes.r-lib.org/reference/update_packages.html</loc>

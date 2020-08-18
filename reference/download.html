@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Standardise dependencies using the same logical as <a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a> — standardise_dep • remotes</title>
+<title>Download a file — download • remotes</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Standardise dependencies using the same logical as <a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a> — standardise_dep" />
-<meta property="og:description" content="Standardise dependencies using the same logical as install.packages" />
+<meta property="og:title" content="Download a file — download" />
+<meta property="og:description" content="Uses either the curl package for R versions older than 3.2.0,
+otherwise a wrapper around download.file()." />
 
 
 
@@ -123,38 +124,75 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Standardise dependencies using the same logical as <a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/remotes/blob/master/R/deps.R'><code>R/deps.R</code></a></small>
-    <div class="hidden name"><code>standardise_dep.Rd</code></div>
+    <h1>Download a file</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/remotes/blob/master/R/download.R'><code>R/download.R</code></a></small>
+    <div class="hidden name"><code>download.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Standardise dependencies using the same logical as <a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></p>
+    <p>Uses either the curl package for R versions older than 3.2.0,
+otherwise a wrapper around <code><a href='https://rdrr.io/r/utils/download.file.html'>download.file()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>standardise_dep</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>download</span>(
+  <span class='no'>path</span>,
+  <span class='no'>url</span>,
+  <span class='kw'>auth_token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>basic_auth</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>headers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>The dependencies to standardise.
-A character vector (selecting from "Depends", "Imports",
-"LinkingTo", "Suggests", or "Enhances"), or a logical vector.</p>
-<p><code>TRUE</code> is shorthand for "Depends", "Imports", "LinkingTo" and
-"Suggests". <code>NA</code> is shorthand for "Depends", "Imports" and "LinkingTo"
-and is the default. <code>FALSE</code> is shorthand for no dependencies.</p>
-<p>The value "soft" means the same as <code>TRUE</code>, "hard" means the same as <code>NA</code>.</p>
-<p>Any additional values that don't match one of the standard dependency
-types are filtered out.</p></td>
+      <th>path</th>
+      <td><p>Path to download to. <code><a href='https://rdrr.io/r/base/basename.html'>dirname(path)</a></code> must exist.</p></td>
+    </tr>
+    <tr>
+      <th>url</th>
+      <td><p>URL.</p></td>
+    </tr>
+    <tr>
+      <th>auth_token</th>
+      <td><p>Token for token-based authentication or <code>NULL</code>.</p></td>
+    </tr>
+    <tr>
+      <th>basic_auth</th>
+      <td><p>List with <code>user</code> and <code>password</code> for basic HTTP
+authentication, or <code>NULL</code>.</p></td>
+    </tr>
+    <tr>
+      <th>quiet</th>
+      <td><p>Passed to <code><a href='https://rdrr.io/r/utils/download.file.html'>download.file()</a></code> or <code><a href='https://jeroen.cran.dev/curl/reference/curl_download.html'>curl::curl_download()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>headers</th>
+      <td><p>Named character vector of HTTP headers to use.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <div class='dont-index'><p><a href='http://r-pkgs.had.co.nz/description.html#dependencies'>http://r-pkgs.had.co.nz/description.html#dependencies</a> for
-additional information on what each dependency type means.</p></div>
+    <p><code>path</code>, if the download was successful.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>We respect the <code>download.file.method</code> setting of the user. If it is
+not set, then see <code>download_method()</code> for choosing a method.</p>
+<p>Authentication can be supplied three ways:</p><ul>
+<li><p>By setting <code>auth_token</code>. This will append an HTTP <code>Authorization</code>
+header: <code>Authorization: token {auth_token}</code>.</p></li>
+<li><p>By setting <code>basic_auth</code> to a list with elements <code>user</code> and <code>password</code>.
+This will append a proper <code>Authorization: Basic {encoded_password}</code>
+HTTP header.</p></li>
+<li><p>By specifying the proper <code>headers</code> directly.</p></li>
+</ul>
+
+<p>If both <code>auth_token</code> and <code>basic_auth</code> are specified, that's an error.
+<code>auth_token</code> and <code>basic_auth</code> are <em>appended</em> to <code>headers</code>, so they
+take precedence over an <code>Authorization</code> header that is specified
+directly in <code>headers</code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

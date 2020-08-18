@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Standardise dependencies using the same logical as <a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a> — standardise_dep • remotes</title>
+<title>Query the system requirements for a dev package (and its dependencies) — system_requirements • remotes</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Standardise dependencies using the same logical as <a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a> — standardise_dep" />
-<meta property="og:description" content="Standardise dependencies using the same logical as install.packages" />
+<meta property="og:title" content="Query the system requirements for a dev package (and its dependencies) — system_requirements" />
+<meta property="og:description" content="Returns a character vector of commands to run that will install system
+requirements for the queried operating system." />
 
 
 
@@ -123,38 +124,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Standardise dependencies using the same logical as <a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/remotes/blob/master/R/deps.R'><code>R/deps.R</code></a></small>
-    <div class="hidden name"><code>standardise_dep.Rd</code></div>
+    <h1>Query the system requirements for a dev package (and its dependencies)</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/remotes/blob/master/R/system_requirements.R'><code>R/system_requirements.R</code></a></small>
+    <div class="hidden name"><code>system_requirements.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Standardise dependencies using the same logical as <a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></p>
+    <p>Returns a character vector of commands to run that will install system
+requirements for the queried operating system.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>standardise_dep</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>system_requirements</span>(<span class='no'>os</span>, <span class='no'>os_release</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>curl</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.which.html'>Sys.which</a></span>(<span class='st'>"curl"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>The dependencies to standardise.
-A character vector (selecting from "Depends", "Imports",
-"LinkingTo", "Suggests", or "Enhances"), or a logical vector.</p>
-<p><code>TRUE</code> is shorthand for "Depends", "Imports", "LinkingTo" and
-"Suggests". <code>NA</code> is shorthand for "Depends", "Imports" and "LinkingTo"
-and is the default. <code>FALSE</code> is shorthand for no dependencies.</p>
-<p>The value "soft" means the same as <code>TRUE</code>, "hard" means the same as <code>NA</code>.</p>
-<p>Any additional values that don't match one of the standard dependency
-types are filtered out.</p></td>
+      <th>os, os_release</th>
+      <td><p>The operating system and operating system release version, see
+<a href='https://github.com/rstudio/r-system-requirements#operating-systems'>https://github.com/rstudio/r-system-requirements#operating-systems</a> for the
+list of supported operating systems.</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>The path to the dev package's root directory.</p></td>
+    </tr>
+    <tr>
+      <th>curl</th>
+      <td><p>The location of the curl binary on your system.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <div class='dont-index'><p><a href='http://r-pkgs.had.co.nz/description.html#dependencies'>http://r-pkgs.had.co.nz/description.html#dependencies</a> for
-additional information on what each dependency type means.</p></div>
+    <p>A character vector of commands needed to install the system requirements for the package.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
